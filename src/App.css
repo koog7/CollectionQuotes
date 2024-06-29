@@ -33,3 +33,17 @@
 .nav-link:hover {
   background-color: #555;
 }
+
+.sidebar{
+  width: 100px;
+  text-align: left;
+
+}
+
+.navlink{
+  color: white;
+  text-decoration: none;
+}
+.navlink:hover{
+  text-decoration: underline;
+}
