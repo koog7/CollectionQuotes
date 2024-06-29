@@ -1,6 +1,5 @@
-import './App.css'
+import './App.css';
 import {NavLink, Route, Routes} from "react-router-dom";
-// import Home from "./containers/Home.tsx";
 import AddForm from "./containers/AddForm.tsx";
 import Quotes from "./containers/Quotes.tsx";
 import Edit from "./containers/Edit.tsx";
@@ -11,7 +10,7 @@ const App = () => {
         <>
             <div>
                 <div className="navbar">
-                    <h2>Quotes Central</h2>
+                    <h2><NavLink className={'logo'} to="/">Quotes Central</NavLink></h2>
                     <div>
                         <NavLink className="nav-link" to="/">Quotes</NavLink>
                         <NavLink className="nav-link" to="/new-quote">Submit new quotes</NavLink>
@@ -36,4 +35,4 @@ const App = () => {
     );
 };
 
-export default App
+export default App;

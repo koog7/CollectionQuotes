@@ -47,3 +47,10 @@
 .navlink:hover{
   text-decoration: underline;
 }
+.logo{
+  color: white;
+  text-decoration: none;
+}
+.logo:hover{
+  text-decoration: underline;
+}

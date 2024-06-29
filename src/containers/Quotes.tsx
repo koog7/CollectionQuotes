@@ -1,7 +1,7 @@
 import Home from "./Home.tsx";
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import axiosAPI from '../axios/axiosLink.tsx'
+import axiosAPI from '../axios/axiosLink.tsx';
 import {Button, Card, CardContent, Typography} from "@mui/material";
 
 interface FormData  {
@@ -12,8 +12,8 @@ interface FormData  {
 }
 
 const Quotes = () => {
-    const [quotes, setQuotes] = useState<FormData[]>([])
-    const {category} = useParams()
+    const [quotes, setQuotes] = useState<FormData[]>([]);
+    const {category} = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,8 +30,8 @@ const Quotes = () => {
                     ...response.data[key]
                 }));
                 setQuotes(quotesArray);
-            })
-        }
+            });
+        };
 
         void getQuotes();
     }, [category]);
@@ -43,10 +43,10 @@ const Quotes = () => {
         }catch (error) {
             console.error('Error deleting quote:', error);
         }
-    }
+    };
     const navToEdit = (quoteId: string) => {
-      navigate(`/quotes/${quoteId}/edit`)
-    }
+      navigate(`/quotes/${quoteId}/edit`);
+    };
     return (
         <div style={{display:"flex", flexDirection: 'row'}}>
             <Home />

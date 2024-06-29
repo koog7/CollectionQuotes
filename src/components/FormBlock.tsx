@@ -15,7 +15,7 @@ const FormBlock: React.FC = () => {
         quoteCategory: 'star-wars',
         author: '',
         quote: '',
-    })
+    });
     const navigate = useNavigate();
     const {id} = useParams();
 
@@ -24,7 +24,7 @@ const FormBlock: React.FC = () => {
             axiosApi.get(`/quotes/${id}.json`)
                 .then(response => {
                     setNewQuote({ id, ...response.data });
-                })
+                });
         }else {
             setNewQuote({
                 quoteCategory: 'star-wars',
@@ -47,17 +47,15 @@ const FormBlock: React.FC = () => {
         try {
             if (id) {
                 await axiosApi.put(`/quotes/${id}.json`, newQuote);
-                navigate('/')
+                navigate('/');
             } else {
                 await axiosApi.post('/quotes.json', newQuote);
             }
         } finally {
             navigate('/');
         }
-    }
-    useEffect(() => {
-        console.log(newQuote)
-    }, [newQuote]);
+    };
+
     return (
         <form onSubmit={createQuote}>
             <div style={{display: 'flex', flexDirection: 'column', width: '400px', margin: '0 auto', gap: '10px'}}>
