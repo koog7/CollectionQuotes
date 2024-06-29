@@ -3,6 +3,7 @@ import {NavLink, Route, Routes} from "react-router-dom";
 // import Home from "./containers/Home.tsx";
 import AddForm from "./containers/AddForm.tsx";
 import Quotes from "./containers/Quotes.tsx";
+import Edit from "./containers/Edit.tsx";
 
 const App = () => {
 
@@ -25,6 +26,9 @@ const App = () => {
                     )}/>
                     <Route path="/category/:category" element={(
                         <Quotes/>
+                    )}/>
+                    <Route path="/quotes/:id/edit" element={(
+                        <Edit/>
                     )}/>
                 </Routes>
             </div>

@@ -1,6 +1,6 @@
 import Home from "./Home.tsx";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axiosAPI from '../axios/axiosLink.tsx'
 import {Button, Card, CardContent, Typography} from "@mui/material";
 
@@ -14,6 +14,7 @@ interface FormData  {
 const Quotes = () => {
     const [quotes, setQuotes] = useState<FormData[]>([])
     const {category} = useParams()
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getQuotes = async () => {
@@ -43,7 +44,9 @@ const Quotes = () => {
             console.error('Error deleting quote:', error);
         }
     }
-
+    const navToEdit = (quoteId: string) => {
+      navigate(`/quotes/${quoteId}/edit`)
+    }
     return (
         <div style={{display:"flex", flexDirection: 'row'}}>
             <Home />
@@ -70,10 +73,8 @@ const Quotes = () => {
                                         </Typography>
                                     </CardContent>
                                     <CardContent sx={{marginLeft: 'auto', display: "flex", gap: '5px'}}>
-                                        <Button variant="outlined"
-                                                sx={{color: 'green', borderColor: 'green'}}>Edit</Button>
-                                        <Button variant="outlined" sx={{color: 'red', borderColor: 'red'}}
-                                                onClick={() => deleteQuote(quote.id)}>Delete</Button>
+                                        <Button variant="outlined" sx={{color: 'green', borderColor: 'green'}} onClick={() => navToEdit(quote.id)}>Edit</Button>
+                                        <Button variant="outlined" sx={{color: 'red', borderColor: 'red'}} onClick={() => deleteQuote(quote.id)}>Delete</Button>
                                     </CardContent>
                                 </Card>
                             </div>

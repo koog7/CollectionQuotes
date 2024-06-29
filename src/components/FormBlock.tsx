@@ -1,9 +1,10 @@
 import {Button, TextField} from "@mui/material";
 import React, {ChangeEvent, useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axiosApi from "../axios/axiosLink.tsx";
 
 interface FormData  {
+    id?: string;
     quoteCategory: string;
     author: string;
     quote: string;
@@ -16,6 +17,23 @@ const FormBlock: React.FC = () => {
         quote: '',
     })
     const navigate = useNavigate();
+    const {id} = useParams();
+
+    useEffect(() => {
+        if (id) {
+            axiosApi.get(`/quotes/${id}.json`)
+                .then(response => {
+                    setNewQuote({ id, ...response.data });
+                })
+        }else {
+            setNewQuote({
+                quoteCategory: 'star-wars',
+                author: '',
+                quote: '',
+            });
+        }
+    }, [id]);
+
     const targetValues = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setNewQuote({
@@ -27,7 +45,12 @@ const FormBlock: React.FC = () => {
     const createQuote = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
-            await axiosApi.post('/quotes.json', newQuote);
+            if (id) {
+                await axiosApi.put(`/quotes/${id}.json`, newQuote);
+                navigate('/')
+            } else {
+                await axiosApi.post('/quotes.json', newQuote);
+            }
         } finally {
             navigate('/');
         }
