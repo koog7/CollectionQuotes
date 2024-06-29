@@ -1,6 +1,6 @@
 import './App.css'
 import {NavLink, Route, Routes} from "react-router-dom";
-import Home from "./containers/Home.tsx";
+// import Home from "./containers/Home.tsx";
 import AddForm from "./containers/AddForm.tsx";
 import Quotes from "./containers/Quotes.tsx";
 
@@ -18,7 +18,7 @@ const App = () => {
                 </div>
                 <Routes>
                     <Route path="/" element={(
-                        <Home/>
+                        <Quotes />
                     )}/>
                     <Route path="/new-quote" element={(
                         <AddForm/>

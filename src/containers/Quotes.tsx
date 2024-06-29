@@ -14,30 +14,27 @@ interface FormData  {
 const Quotes = () => {
     const [quotes, setQuotes] = useState<FormData[]>([])
     const {category} = useParams()
+
     useEffect(() => {
-        if(category !== 'all'){
-            axiosAPI.get(`/quotes.json?orderBy="quoteCategory"&equalTo="${category}"`)
-                .then(response => {
-                    const quotesArray = Object.keys(response.data).map(key => ({
-                        id: key,
-                        ...response.data[key]
-                    }));
-                    setQuotes(quotesArray);
-                    console.log(response.data)
-                });
-        }else{
-            axiosAPI.get('/quotes.json')
-                .then(response => {
-                    const quotesArray = Object.keys(response.data).map(key => ({
-                        id: key,
-                        ...response.data[key]
-                    }));
-                    setQuotes(quotesArray);
-                    console.log(response.data)
-                });
+        const getQuotes = async () => {
+
+            let url = '/quotes.json';
+            if (category && category !== 'all') {
+                url += `?orderBy="quoteCategory"&equalTo="${category}"`;
+            }
+
+            await axiosAPI.get(url).then(response => {
+                const quotesArray = Object.keys(response.data).map(key => ({
+                    id: key,
+                    ...response.data[key]
+                }));
+                setQuotes(quotesArray);
+            })
         }
+
+        void getQuotes();
     }, [category]);
-    console.log(quotes)
+
     const deleteQuote = async (quoteId: string) => {
         try {
             await axiosAPI.delete(`/quotes/${quoteId}.json`);
