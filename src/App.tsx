@@ -1,6 +1,7 @@
 import './App.css'
 import {NavLink, Route, Routes} from "react-router-dom";
 import Home from "./containers/Home.tsx";
+import AddForm from "./containers/AddForm.tsx";
 
 const App = () => {
     return(
@@ -16,6 +17,9 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={(
                         <Home />
+                    )}/>
+                    <Route path="/new-quote" element={(
+                        <AddForm />
                     )}/>
                 </Routes>
             </div>
